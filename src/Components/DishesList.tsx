@@ -12,7 +12,8 @@ const DishesList = ({dishes}: DishesListProps) => {
             <Box sx={{width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper'}}>
                 {dishes.map((food) => (
                     <DishItem
-                        food={food.food}
+                        onAdd={() => {}}
+                        food={food}
                         key={food.food.foodId + Math.floor(Math.random() * 1000)}
                     />
                 ))}

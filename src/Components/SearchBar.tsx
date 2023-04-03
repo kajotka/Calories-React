@@ -15,7 +15,7 @@ const SearchBar = ({ searchTerm, onSearch, onChange }: SearchBarProps) => {
             <input
                 value={searchTerm}
                 onChange={onChange}
-                placeholder="Search for food"
+                placeholder="Znajdź danie..."
             />
             <FaSearch onClick={() => onSearch(searchTerm)} />
         </div>

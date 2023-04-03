@@ -3,6 +3,7 @@ import FoodItem from "../Interface/FoodItem";
 import './dishItem.scss'
 import {
     Avatar,
+    Button,
     Divider,
     ListItem,
     ListItemAvatar,
@@ -20,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const DishItem = (food: FoodItem) => {
+const DishItem = ({ food, onAdd }: { food: FoodItem; onAdd: (dish: FoodItem) => void }) => {
     let item = food.food;
     if (!item.image) {
         return null;
@@ -44,6 +45,7 @@ const DishItem = (food: FoodItem) => {
                                 <Item>Białko: {item.nutrients.PROCNT.toFixed(2)}g</Item>
                                 <Item>Tłuszcz: {item.nutrients.FAT.toFixed(2)}g</Item>
                                 <Item>Węglowodany: {item.nutrients.CHOCDF.toFixed(2)}g</Item>
+                                <Button onClick={() => onAdd(food)} variant="contained">Dodaj</Button>
                             </Stack>
                         </React.Fragment>
                     }

@@ -30,7 +30,7 @@ const PersonForm = ({ handleSubmit, ppm }: FormProps) => {
 
     return (
 
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} id="person-form">
             <FormGroup row={true}>
             <FormControl >
                 <TextField
