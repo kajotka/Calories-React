@@ -1,30 +1,55 @@
-import React from 'react';
 import Macronutrients from '../Interface/Macronutrients';
-import DishItem from './DishItem';
 import ProgressBar from '@ramonak/react-progress-bar';
-import { Box } from '@mui/material';
 
 const EatProgress = ({ macroValues, eatenMacros }: { macroValues: Macronutrients; eatenMacros: Macronutrients }) => {
-    const colors = ['#FF6B6B', '#FFE66D', '#6BFFB4', '#6D6DFF'];
 
     const barLabels = [
-        { name: 'Kalorie', value: (eatenMacros.ppm / macroValues.ppm * 100).toFixed(0) },
-        { name: 'Tłuszcz', value: (eatenMacros.fat / macroValues.fat * 100).toFixed(0) },
-        { name: 'Weglowodany', value: (eatenMacros.carbs / macroValues.carbs * 100).toFixed(0) },
-        { name: 'Białka', value: (eatenMacros.protein / macroValues.protein * 100).toFixed(0) },
+        { 
+            name: 'Kalorie', 
+            value: (eatenMacros.ppm / macroValues.ppm * 100).toFixed(0), 
+            eaten: (eatenMacros.ppm).toFixed(0), 
+            total: (macroValues.ppm).toFixed(0), 
+            unit: 'kcal',
+            color: '#FF6B6B'
+        },
+        { 
+            name: 'Tłuszcz', 
+            value: (eatenMacros.fat / macroValues.fat * 100).toFixed(0), 
+            eaten: (eatenMacros.fat).toFixed(0), 
+            total: (macroValues.fat).toFixed(0), 
+            unit: 'g',
+            color: '#FFE66D'
+        },
+        { 
+            name: 'Weglowodany', 
+            value: (eatenMacros.carbs / macroValues.carbs * 100).toFixed(0), 
+            eaten: (eatenMacros.carbs).toFixed(0), 
+            total: (macroValues.carbs).toFixed(0), 
+            unit: 'g',
+            color: '#6BFFB4'
+        },
+        { 
+            name: 'Białka', 
+            value: (eatenMacros.protein / macroValues.protein * 100).toFixed(0), 
+            eaten: (eatenMacros.protein).toFixed(0), 
+            total: (macroValues.protein).toFixed(0), 
+            unit: 'g',
+            color: '#6D6DFF'
+        }
     ];
 
     return (
-        <div className="container" style={{display: "grid"}}>
+        <div className="container" style={{ display: "grid" }}>
             {barLabels.map((label, index) => (
                 <ProgressBar
                     key={index}
                     completed={label.value}
-                    bgColor={colors[index]}
+                    bgColor={label.color}
                     height="20px"
                     width="400px"
-                    customLabel={`${label.name}: ${label.value}%`}
+                    customLabel={`${label.name}: ${label.value}% (${label.eaten} / ${label.total}${label.unit})`}
                     labelAlignment="outside"
+                    completedClassName="full"
                 />
             ))}
         </div>

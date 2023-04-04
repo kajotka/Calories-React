@@ -10,6 +10,7 @@ import PersonFormInterface from "./Interface/PersonFormInterface";
 import calculatePPM from "./Helpers/CalculatePPM";
 import DishesTable from "./Components/DishesTable";
 import EatProgress from "./Components/EatProgress";
+import DishesList from "./Components/DishesList";
 
 interface PPM {
     ppm: number;
@@ -24,6 +25,8 @@ const App = () => {
     const [eatenDishes, setEatenDishes] = useState<FoodItem[]>([]);
     const [macroValues, setMacroValues] = useState<Macronutrients>({ ppm: 0, carbs: 0, fat: 0, protein: 0 });
     const [eatenMacros, setEatenMacros] = useState<Macronutrients>({ ppm: 0, carbs: 0, fat: 0, protein: 0 });
+    const [personFormSubmitted, setPersonFormSubmitted] = useState<boolean>(false);
+
     const searchFood = async (title: string) => {
         const response = await fetch(`${API_URL}&ingr=${title}`);
         const data: FoodResult = await response.json();
@@ -40,6 +43,7 @@ const App = () => {
         }));
     }
 
+    // TODO: użyć tego
     function removeEatenDish(dish: FoodItem) {
         setEatenDishes((prevState) => prevState.filter((item) => item.food.foodId !== dish.food.foodId));
         setEatenMacros((prevState) => ({
@@ -61,25 +65,21 @@ const App = () => {
                     setPpmValues({ ppm: ppm });
                     setMacroValues({ ppm: ppm, carbs: (ppm * 0.6) / 4, fat: (ppm * 0.25) / 9, protein: (ppm * 0.15) / 4 });
                     document.getElementById("person-form")?.classList.add("hidden");
+                    setPersonFormSubmitted(true);
                 }}
-                ppm={ppmValues.ppm}
             />
-            <SearchBar onChange={(e) => setSearchTerm(e.target.value)} onSearch={searchFood} searchTerm={searchTerm} />
-
-            {dishes.length > 0 ? (
-                <div className="container">
-                    {dishes.map((food) => (
-                        <DishItem onAdd={addEatenDish} food={food} key={food.food.foodId + Math.floor(Math.random() * 1000)} />
-                    ))}
+            {personFormSubmitted ? (
+                <div style={{width: "100%"}}>
+                    <EatProgress eatenMacros={eatenMacros} macroValues={macroValues} />
+                    {eatenDishes.length > 0 ? (
+                    <DishesTable dishes={eatenDishes} />
+                    ) : null}
+                    <SearchBar onChange={(e) => setSearchTerm(e.target.value)} onSearch={searchFood} searchTerm={searchTerm} />
+                    <DishesList onAdd={addEatenDish} dishes={dishes} />
                 </div>
-            ) : (
-                <div className="empty">
-                    <h2>Brak wyników</h2>
-                </div>
-            )}
-            <DishesTable dishes={eatenDishes} />
-            <EatProgress eatenMacros={eatenMacros} macroValues={macroValues} />
+            ) : null}
         </div>
+
     );
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import './searchBar.scss'
 import { FaSearch } from 'react-icons/fa';
+import { TextField } from "@mui/material";
 
 
 interface SearchBarProps {

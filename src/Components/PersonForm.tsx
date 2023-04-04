@@ -12,10 +12,9 @@ import {
 
 interface FormProps {
     handleSubmit: (values: PersonFormInterface) => void;
-    ppm: number;
 }
 
-const PersonForm = ({ handleSubmit, ppm }: FormProps) => {
+const PersonForm = ({ handleSubmit }: FormProps) => {
     const [values, setValues] = useState<PersonFormInterface>({
         height: 0,
         weight: 0,
@@ -68,12 +67,12 @@ const PersonForm = ({ handleSubmit, ppm }: FormProps) => {
                     id="gender-select"
                     label="Age"
                     autoWidth
+                    defaultValue={""}
                     style={{ width: 200 }}
                     onChange={(e) =>
                         setValues({ ...values, gender: e.target.value as string })
                     }
                 >
-                    <MenuItem value="">Wybierz</MenuItem>
                     <MenuItem value="male">Mężczyzna</MenuItem>
                     <MenuItem value="female">Kobieta</MenuItem>
                 </Select>
