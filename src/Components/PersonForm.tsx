@@ -9,6 +9,7 @@ import {
     MenuItem,
     FormGroup
 } from '@mui/material';
+import './personForm.scss'
 
 interface FormProps {
     handleSubmit: (values: PersonFormInterface) => void;
@@ -82,7 +83,7 @@ const PersonForm = ({ handleSubmit }: FormProps) => {
                 color="primary"
                 type="submit"
             >
-                Submit
+                Zapisz
             </Button>
             </FormGroup>
         </form>

@@ -49,7 +49,9 @@ const EatProgress = ({ macroValues, eatenMacros }: { macroValues: Macronutrients
                     width="400px"
                     customLabel={`${label.name}: ${label.value}% (${label.eaten} / ${label.total}${label.unit})`}
                     labelAlignment="outside"
-                    completedClassName="full"
+                    labelClassName={`${parseInt(label.value) > 100 ? 'red' : ''}`}
+                    // className='progress-bar'
+                    margin='5px'
                 />
             ))}
         </div>

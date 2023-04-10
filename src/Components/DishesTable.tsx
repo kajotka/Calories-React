@@ -8,7 +8,7 @@ const DishesTable = ({dishes}: {dishes: FoodItem[]}) => {
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dish Name</TableCell>
+                        <TableCell>Danie</TableCell>
                         <TableCell align="right">Kalorie</TableCell>
                         <TableCell align="right">Tłuszcz&nbsp;(g)</TableCell>
                         <TableCell align="right">Węglowodany&nbsp;(g)</TableCell>
@@ -21,7 +21,7 @@ const DishesTable = ({dishes}: {dishes: FoodItem[]}) => {
                             <TableCell component="th" scope="row">
                                 {food.food.label}
                             </TableCell>
-                            <TableCell align="right">{food.food.nutrients.ENERC_KCAL.toFixed(1)}</TableCell>
+                            <TableCell align="right">{food.food.nutrients.ENERC_KCAL.toFixed(0)}</TableCell>
                             <TableCell align="right">{food.food.nutrients.FAT.toFixed(1)}</TableCell>
                             <TableCell align="right">{food.food.nutrients.CHOCDF.toFixed(1)}</TableCell>
                             <TableCell align="right">{food.food.nutrients.PROCNT.toFixed(1)}</TableCell>
